@@ -12,7 +12,7 @@ def load_tasks(file_path=DEFAULT_TASKS_FILE):
     Args:
         file_path (str): Path to the JSON file containing tasks
         
-    Returns:
+    Returns: 
         list: List of task dictionaries, empty list if file doesn't exist
     """
     try:
@@ -123,3 +123,8 @@ def get_overdue_tasks(tasks):
         if not task.get("completed", False) and 
            task.get("due_date", "") < today
     ]
+def mark_all_tasks_complete(file_path=DEFAULT_TASKS_FILE):
+    tasks = load_tasks(file_path)
+    for task in tasks:
+        task["completed"] = True
+    save_tasks(tasks, file_path)

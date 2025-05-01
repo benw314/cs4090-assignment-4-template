@@ -84,50 +84,39 @@ def main():
                 st.rerun()
 
     # ---- TEST PANEL ----
-    with st.sidebar.expander("🧪 Testing Dashboard", expanded=True):
+    with st.sidebar.expander("Testing Dashboard", expanded=True):
         st.markdown("### Unit Testing")
-        if st.button("▶ Run Unit Tests"):
+        if st.button("Run Unit Tests"):
             run_test_command("Unit Tests", ["pytest", "tests/test_units.py", "--cov=src", "--cov-report=term-missing"])
 
         st.markdown("### Bug Reporting & Fixing")
-        if st.button("🐞 Confirm Bug Fixes"):
+        if st.button("Confirm Bug Fixes"):
             run_test_command("Bug Fix Confirmation", ["pytest", "tests/test_units.py"])
 
         st.markdown("### Pytest Features")
         col1, col2 = st.columns(2)
         with col1:
-            if st.button("📊 Pytest-Cov"):
+            if st.button("Pytest-Cov"):
                 run_test_command("Coverage Report", ["pytest", "--cov=src", "--cov-report=term-missing"])
-            if st.button("🧪 Parametrize"):
+            if st.button("Parametrize"):
                 run_test_command("Parametrized Tests", ["pytest", "tests/test_advanced.py"])
         with col2:
-            if st.button("🕵️ Mocking"):
+            if st.button("Mocking"):
                 run_test_command("Mock Tests", ["pytest", "tests/test_mocking.py"])
-            if st.button("📝 HTML Report"):
+            if st.button("HTML Report"):
                 run_test_command("HTML Report", ["pytest", "--html=report.html", "--self-contained-html"])
 
         st.markdown("### Test-Driven Development (TDD)")
-        if st.button("🚧 Run TDD Tests"):
+        if st.button("Run TDD Tests"):
             run_test_command("TDD", ["pytest", "tests/test_tdd.py"])
 
         st.markdown("### Behavior-Driven Development (BDD)")
-        if st.button("🎭 Run BDD Tests"):
+        if st.button("Run BDD Tests"):
             run_test_command("BDD", ["behave"], working_dir="tests/features")
 
         st.markdown("### Property-Based Testing (Bonus)")
-        if st.button("🔁 Run Hypothesis Tests"):
+        if st.button("Run Hypothesis Tests"):
             run_test_command("Hypothesis", ["pytest", "tests/test_property.py"])
-
-        # ---- Developer Tools ----
-    st.sidebar.markdown("---")
-    st.sidebar.markdown("### 🧰 Developer Tools")
-
-    if st.sidebar.button("🔁 Rerun App"):
-        st.rerun()
-
-    if st.sidebar.button("🧪 Force Rerun Tests"):
-        st.session_state.pop("test_results", None)  # Clear cached results
-        st.rerun()
 
 
 if __name__ == "__main__":

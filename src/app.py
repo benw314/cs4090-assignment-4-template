@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import uuid
 import subprocess
 from datetime import datetime
 from tasks import load_tasks, save_tasks, filter_tasks_by_priority, filter_tasks_by_category
@@ -37,7 +38,7 @@ def main():
 
         if submit and task_title:
             new_task = {
-                "id": len(tasks) + 1,
+                "id": str(uuid.uuid4()),
                 "title": task_title,
                 "description": task_description,
                 "priority": task_priority,
@@ -66,6 +67,8 @@ def main():
         filtered_tasks = filter_tasks_by_priority(filtered_tasks, filter_priority)
     if not show_completed:
         filtered_tasks = [t for t in filtered_tasks if not t["completed"]]
+    if show_completed:
+        filtered_tasks = [t for t in filtered_tasks if t["completed"]]
 
     for task in filtered_tasks:
         c1, c2 = st.columns([4, 1])
